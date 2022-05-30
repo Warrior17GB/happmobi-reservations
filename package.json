@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
     "concurrently": "^7.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
