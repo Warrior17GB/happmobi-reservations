@@ -1,0 +1,53 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API gerenciamento de reservas de veículos",
+        "description": "Essa API tem como objetivo gerenciar reservas de veículos. Inicialmente desenvolvida como parte do processo seletivo para Happmobi.",
+        "contact": {
+            "email": "this.dev.gabriel@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Rota inicial.",
+                "description": "Essa é apenas a rota inicial.",
+                "tags": [
+                    "Products"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            },
+                            "examples": {
+                                "product": {
+                                    "value": {
+                                        "name": "Carro"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "tyupe": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
