@@ -23,7 +23,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Vehicle"
+                                    "$ref": "#/components/schemas/Vehicles"
                                 }
                             }
                         }
@@ -234,23 +234,27 @@
     },
     "components": {
         "schemas": {
-            "Vehicle": {
+            "Vehicles": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "number"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "brand": {
-                        "type": "string"
-                    },
-                    "model": {
-                        "type": "string"
-                    },
-                    "available": {
-                        "type": "boolean"
+                    "allVehicles": {
+                        "type": "array",
+                        "example": [
+                            {
+                                "id": "number",
+                                "type": "string",
+                                "brand": "string",
+                                "model": "string",
+                                "available": "boolean"
+                            },
+                            {
+                                "id": "number",
+                                "type": "string",
+                                "brand": "string",
+                                "model": "string",
+                                "available": "boolean"
+                            }
+                        ]
                     }
                 }
             },
