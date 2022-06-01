@@ -16,6 +16,11 @@
                 ],
                 "summary": "Listagem de veículos",
                 "description": "Retorna uma listagem de todos os veículos",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -44,6 +49,11 @@
                 ],
                 "summary": "Reservar veículo",
                 "description": "Reserva um veículo",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -98,6 +108,11 @@
                 ],
                 "summary": "Liberar veículo",
                 "description": "Liberar um veículo",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -312,6 +327,13 @@
                         "type": "string"
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
