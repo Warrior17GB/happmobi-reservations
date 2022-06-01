@@ -131,6 +131,104 @@
                     }
                 }
             }
+        },
+        "/v1/login": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Login",
+                "description": "Realizar login de usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "login": {
+                                    "value": {
+                                        "email": "teste@email.com",
+                                        "password": "123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/LoginToken"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email ou senha incorreta."
+                    }
+                }
+            }
+        },
+        "/v1/register": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Cadastro",
+                "description": "Realizar cadastro de usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "register": {
+                                    "value": {
+                                        "email": "teste@email.com",
+                                        "password": "123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/LoginRegister"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Esse usuário já está cadastrado."
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -152,6 +250,28 @@
                     },
                     "available": {
                         "type": "boolean"
+                    }
+                }
+            },
+            "LoginToken": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+            "LoginRegister": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
                     }
                 }
             }

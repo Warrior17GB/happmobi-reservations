@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 app.use("/v1", routes);
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
-  return response.json({
+  return response.status(400).json({
     status: "Error",
     message: error.message,
   })
