@@ -1,9 +1,9 @@
 import express from 'express';
-import { CreateUserController } from './useCases.ts/createUser/CreateUserController';
-import { AuthenticateUserController } from './useCases.ts/authenticateUser/AuthenticateUserController';
-import { ListVehiclesController } from './useCases.ts/listVehicles/ListVehiclesController';
-import { VehicleReservationController } from './useCases.ts/vehicleReservation/VehicleReservationController';
-import { VehicleReleaseController } from './useCases.ts/vehicleRelease/VehicleReleaseController';
+import { CreateUserController } from './useCases/createUser/CreateUserController';
+import { AuthenticateUserController } from './useCases/authenticateUser/AuthenticateUserController';
+import { ListVehiclesController } from './useCases/listVehicles/ListVehiclesController';
+import { VehicleReservationController } from './useCases/vehicleReservation/VehicleReservationController';
+import { VehicleReleaseController } from './useCases/vehicleRelease/VehicleReleaseController';
 
 export const routes = express.Router()
 
