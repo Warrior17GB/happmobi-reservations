@@ -1,9 +1,12 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from './prisma/client'
+import { CreateUserController } from './useCases.ts/createUser/CreateUserController';
 import express from 'express';
-
-const prisma = new PrismaClient()
+import { AuthenticateUserController } from './useCases.ts/authenticateUser/AuthenticateUserController';
 
 export const routes = express.Router()
+
+const createUserController = new CreateUserController();
+const authenticateUserController = new AuthenticateUserController();
 
 const getAllVehicles = async () => {
     const allVehicles = await prisma.vehicle.findMany()
@@ -33,6 +36,10 @@ const vehicleRelease = async (id: number) => {
         throw error
     }
 }
+
+routes.post("/register", createUserController.handle)
+
+routes.post("/login", authenticateUserController.handle)
 
 routes.get('/list', async (req, res) => {
     const vehicles = await getAllVehicles()
