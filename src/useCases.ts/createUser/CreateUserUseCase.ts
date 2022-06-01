@@ -9,13 +9,13 @@ interface IUserRequest {
 
 class CreateUserUseCase {
     async execute({ email, password }: IUserRequest) {
-        const userAlrwadyExists = await prisma.user.findFirst({
+        const userAlreadyExists = await prisma.user.findFirst({
             where: {
                 email
             }
         });
 
-        if (userAlrwadyExists) {
+        if (userAlreadyExists) {
             throw new Error("Esse usuário já está cadastrado.");
         }
 

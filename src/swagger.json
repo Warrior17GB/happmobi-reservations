@@ -22,7 +22,8 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Vehicle"
                                 }
                             }
                         }
@@ -64,7 +65,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Vehicle"
+                                    "$ref": "#/components/schemas/VehicleUpdated"
                                 }
                             }
                         }
@@ -115,7 +116,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Vehicle"
+                                    "$ref": "#/components/schemas/VehicleUpdated"
                                 }
                             }
                         }
@@ -250,6 +251,27 @@
                     },
                     "available": {
                         "type": "boolean"
+                    }
+                }
+            },
+            "VehicleUpdated": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "vehicle": {
+                        "type": "object",
+                        "example": {
+                            "id": "number",
+                            "type": "string",
+                            "brand": "string",
+                            "model": "string",
+                            "available": "boolean"
+                        }
                     }
                 }
             },
