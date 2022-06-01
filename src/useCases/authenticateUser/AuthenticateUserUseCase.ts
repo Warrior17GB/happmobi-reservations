@@ -25,7 +25,7 @@ class AuthenticateUserUseCase {
             throw new Error("Email ou senha incorreta.");
         }
 
-        const token = sign({}, "e31ec1aa-86de-4107-a748-3e542a9574b9", {
+        const token = sign({}, `${process.env.PRIVATE_KEY}`, {
             subject: `${userAlreadyExist.id}`,
             expiresIn: "1d"
         })

@@ -4,6 +4,7 @@ import { AuthenticateUserController } from './useCases/authenticateUser/Authenti
 import { ListVehiclesController } from './useCases/listVehicles/ListVehiclesController';
 import { VehicleReservationController } from './useCases/vehicleReservation/VehicleReservationController';
 import { VehicleReleaseController } from './useCases/vehicleRelease/VehicleReleaseController';
+import { ensureAuthenticated } from './middlewares/ensureAuthenticated';
 
 export const routes = express.Router()
 
@@ -17,8 +18,8 @@ routes.post("/register", createUserController.handle)
 
 routes.post("/login", authenticateUserController.handle)
 
-routes.get('/list', listVehiclesController.handle)
+routes.get('/list', ensureAuthenticated, listVehiclesController.handle)
 
-routes.post('/reservation', vehicleReservationController.handle)
+routes.post('/reservation', ensureAuthenticated, vehicleReservationController.handle)
 
-routes.post('/release', vehicleReleaseController.handle)
+routes.post('/release', ensureAuthenticated, vehicleReleaseController.handle)

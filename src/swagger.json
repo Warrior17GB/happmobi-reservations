@@ -27,6 +27,12 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Usuário não autenticado."
+                    },
+                    "400": {
+                        "description": "Nenhum veículo encontrado."
                     }
                 }
             }
@@ -74,10 +80,13 @@
                         "description": "ID inválido ou inexistente."
                     },
                     "404": {
-                        "description": "Veículo não encontrado"
+                        "description": "Veículo não encontrado."
                     },
                     "500": {
-                        "description": "Erro interno"
+                        "description": "Erro interno."
+                    },
+                    "401": {
+                        "description": "Usuário não autenticado."
                     }
                 }
             }
@@ -123,6 +132,9 @@
                     },
                     "400": {
                         "description": "ID inválido ou inexistente."
+                    },
+                    "401": {
+                        "description": "Usuário não autenticado."
                     },
                     "404": {
                         "description": "Veículo não encontrado"
