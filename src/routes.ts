@@ -1,7 +1,78 @@
+import { PrismaClient } from '@prisma/client'
 import express from 'express';
+
+const prisma = new PrismaClient()
 
 export const routes = express.Router()
 
-routes.get('/', (req, res) => {
-    res.status(201).send('API no ar!');
-});
+const getAllVehicles = async () => {
+    const allVehicles = await prisma.vehicle.findMany()
+    return allVehicles
+}
+
+const vehicleReservation = async (id: number) => {
+    try {
+        const vehicle = await prisma.vehicle.update({
+            where: { id: id },
+            data: { available: false }
+        })
+        return vehicle
+    } catch (error) {
+        throw error
+    }
+}
+
+const vehicleRelease = async (id: number) => {
+    try {
+        const vehicle = await prisma.vehicle.update({
+            where: { id: id },
+            data: { available: true }
+        })
+        return vehicle
+    } catch (error) {
+        throw error
+    }
+}
+
+routes.get('/list', async (req, res) => {
+    const vehicles = await getAllVehicles()
+    res.status(200).send(vehicles);
+})
+
+routes.post('/reservation', async (req, res) => {
+    const { ID } = req.body
+
+    if (ID) {
+        if (!isNaN(parseInt(ID))) {
+            try {
+                const vehicle = await vehicleReservation(parseInt(ID))
+                res.status(200).send(vehicle)
+            } catch (error: any) {
+                error.code === "P2025" ? res.status(404).send({ error: "Veículo não encontrado" }) : res.status(500).send(error)
+            }
+        } else {
+            res.status(400).send({ error: "ID inválido." })
+        }
+    } else {
+        res.status(400).send({ error: "ID é obrigatório." })
+    }
+})
+
+routes.post('/release', async (req, res) => {
+    const { ID } = req.body
+
+    if (ID) {
+        if (!isNaN(parseInt(ID))) {
+            try {
+                const vehicle = await vehicleRelease(parseInt(ID))
+                res.status(200).send(vehicle)
+            } catch (error: any) {
+                error.code === "P2025" ? res.status(400).send({ error: "Veículo não encontrado" }) : res.status(500).send(error)
+            }
+        } else {
+            res.status(400).send("ID inválido.")
+        }
+    } else {
+        res.status(400).send("ID é obrigatório.")
+    }
+})

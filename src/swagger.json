@@ -9,42 +9,149 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/": {
+        "/v1/list": {
             "get": {
-                "summary": "Rota inicial.",
-                "description": "Essa é apenas a rota inicial.",
                 "tags": [
-                    "Products"
+                    "Vehicles"
                 ],
+                "summary": "Listagem de veículos",
+                "description": "Retorna uma listagem de todos os veículos",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/reservation": {
+            "post": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Reservar veículo",
+                "description": "Reserva um veículo",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Product"
+                                "properties": {
+                                    "ID": {
+                                        "type": "number"
+                                    }
+                                }
                             },
                             "examples": {
-                                "product": {
+                                "vehicle": {
                                     "value": {
-                                        "name": "Carro"
+                                        "ID": 2
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "response": {
-                    
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Vehicle"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ID inválido ou inexistente."
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro interno"
+                    }
+                }
+            }
+        },
+        "/v1/release": {
+            "post": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Liberar veículo",
+                "description": "Liberar um veículo",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "ID": {
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "vehicle": {
+                                    "value": {
+                                        "ID": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Vehicle"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ID inválido ou inexistente."
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro interno"
+                    }
                 }
             }
         }
     },
     "components": {
         "schemas": {
-            "Product": {
-                "tyupe": "object",
+            "Vehicle": {
+                "type": "object",
                 "properties": {
-                    "name": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "type": {
                         "type": "string"
+                    },
+                    "brand": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "available": {
+                        "type": "boolean"
                     }
                 }
             }
