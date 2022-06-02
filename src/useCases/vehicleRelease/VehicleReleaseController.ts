@@ -3,12 +3,12 @@ import { VehicleReleaseUseCase } from './VehicleReleaseUseCase';
 
 class VehicleReleaseController {
     async handle(request: Request, response: Response) {
-        const { ID } = request.body;
+        const { vehicleID } = request.body;
 
         const vehicleReleaseUseCase = new VehicleReleaseUseCase();
 
         const vehicle = await vehicleReleaseUseCase.execute({
-            ID: parseInt(ID)
+            vehicleID: parseInt(vehicleID)
         });
 
         return response.json(vehicle);

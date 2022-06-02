@@ -1,18 +1,25 @@
 import { prisma } from '../../prisma/client';
 
 interface IRelease {
-    ID: number
+    vehicleID: number
 }
 
 class VehicleReleaseUseCase {
-    async execute({ ID }: IRelease) {
-        if (isNaN(ID)) {
-            throw new Error("ID inválido.")
+    async execute({ vehicleID }: IRelease) {
+        if (!vehicleID) {
+            throw new Error("vehicleID é obrigatórios.")
+        }
+
+        if (isNaN(vehicleID)) {
+            throw new Error("ID do veículo inválido.")
         }
 
         const vehicleExists = await prisma.vehicle.findUnique({
             where: {
-                id: ID
+                id: vehicleID
+            },
+            include: {
+                user: true
             }
         });
 
@@ -20,16 +27,17 @@ class VehicleReleaseUseCase {
             throw new Error("Veículo não encontrado.");
         }
 
-        if (vehicleExists.available == true) {
-            throw new Error("Este veículo já foi liberado.");
+        if (!vehicleExists.user) {
+            throw new Error("Este veículo não foi reservado.");
         }
 
         const vehicleReleased = await prisma.vehicle.update({
             where: {
-                id: ID
+                id: vehicleID
             },
             data: {
-                available: true
+                available: true,
+                userId: null
             }
         })
 
